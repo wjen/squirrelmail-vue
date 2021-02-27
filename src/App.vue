@@ -1,6 +1,14 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <h1>Vue Mail</h1>
+  <table class="mail-table">
+    <tbody>
+      <tr v-for="email in emails" :key="email.id" class="clickable">
+        {{
+          email.subject
+        }}
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>
@@ -8,8 +16,50 @@ import HelloWorld from "./components/HelloWorld.vue";
 
 export default {
   name: "App",
-  components: {
-    HelloWorld
+  data() {
+    return {
+      emails: [
+        {
+          id: 1,
+          from: "wjen@gmail.com",
+          subject: "What's up with Vue 3.0?",
+          body: "Lets learn more about vue 3 together, join us at the conference",
+          sentAt: "2020-03-27T18:25:43.511Z",
+          archived: false,
+          read: true
+        },
+        {
+          id: 2,
+          from: "jeffrey@yahoo.net",
+          subject: "Learn by doing - Vue 3 Zero to Intermediate in 8 weeks",
+          body:
+            "Building projects is one of the most effective ways to learn - and _the_ most effective way _remember_ what you've learned - but it can be frustrating.\n\nThis 8-week course takes the pain out of 'learning by doing'.\n\nEach week we give you\n\n* a project that will grow your skills without overwhelming you\n* links to hand-picked resources, such as Vue Mastery videos, that share the knowledge you'll need for the project (no more useless rabbit holes)\n* answers to any and all questions you have while working\n* feedback on your completed code (so you're only learning good habits)\n\nOur instructors are standing by to answer your questions.\n\nReady to learn?",
+          sentAt: "2020-05-20T18:25:43.511Z",
+          archived: false,
+          read: false
+        },
+        {
+          id: 3,
+          from: "damian@gmail.com",
+          subject:
+            "#177: Updated Vue.js Roadmap; Vuex v4.0.0-alpha.1 has been released; Kia King Ishii join the core team; Nuxt v2.12 released; Videos from Vue.js Amsterdam 2020 are here!",
+          body:
+            "First of all, lets congratulate Kia King Ishii on joining the Vue.js core team! 🎉 He has been doing an incredible job building vuex-orm and will now focus on working on the next versions of Vuex.\n\nSpeaking of which – Vuex v4.0.0-alpha.1 has just been released! This is the version of Vuex that will work with Vue 3.0 but keep the familiar API you know from the current version.",
+          sentAt: "2020-03-18T18:25:43.511Z",
+          archived: false,
+          read: false
+        },
+        {
+          id: 4,
+          from: "anthony@yahoo.com",
+          subject: "'Vue 3 Release Roadmap' + 6 more must-read articles from this week",
+          body: "Newsletter Issue #161",
+          sentAt: "2020-03-24T18:25:43.511Z",
+          archived: true,
+          read: false
+        }
+      ]
+    };
   }
 };
 </script>
