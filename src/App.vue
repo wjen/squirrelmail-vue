@@ -1,6 +1,5 @@
 <template>
   <h1>VMail Inbox</h1>
-  <h1>{{ emailSelection.emails.size }} emails selected</h1>
 
   <Suspense>
     <template #default>
@@ -141,5 +140,23 @@ input[type="checkbox"]:checked {
 /* Email Modal */
 .email-display {
   text-align: left;
+}
+
+/* Bulk Action Bar */
+.bulk-action-bar {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  text-align: left;
+  padding-bottom: 8px;
+
+  input {
+    margin: 5px;
+  }
+
+  .checkbox {
+    margin-right: 6px;
+    margin-left: 3px;
+  }
 }
 </style>
