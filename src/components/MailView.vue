@@ -21,20 +21,9 @@
 <script>
 import { format } from "date-fns";
 import marked from "marked";
-// import axios from "axios";
 import useKeydown from "../composables/use-keydown";
 export default {
   setup(props, { emit }) {
-    // let toggleRead = () => {
-    //   let email = props.email;
-    //   email.read = !email.read;
-    //   axios.put(`http://localhost:3000/emails/${email.id}`, email);
-    // };
-    // let toggleArchive = () => {
-    //   let email = props.email;
-    //   email.archived = !email.archived;
-    //   axios.put(`http://localhost:3000/emails/${email.id}`, email);
-    // };
     let toggleRead = () => {
       emit("changeEmail", { toggleRead: true, save: true });
     };

@@ -1,5 +1,6 @@
 <template>
   <h1>VMail Inbox</h1>
+  <h1>{{ emailSelection.emails.size }} emails selected</h1>
 
   <Suspense>
     <template #default>
@@ -13,10 +14,16 @@
 
 <script>
 import MailTable from "@/components/MailTable.vue";
+import useEmailSelection from "@/composables/use-email-selection";
 export default {
   name: "App",
   components: {
     MailTable
+  },
+  setup() {
+    return {
+      emailSelection: useEmailSelection()
+    };
   }
 };
 </script>
@@ -32,10 +39,47 @@ export default {
   max-width: 1000px;
   margin: 0 auto;
 }
-/* Global Styles */
 
+/* Global Styles */
+button {
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 3px;
+  margin: 5px 10px 5px 0px;
+  cursor: pointer;
+}
+button:disabled {
+  cursor: auto;
+}
+button.selected {
+  cursor: auto;
+  color: black;
+  border-color: black;
+  border-width: 2px;
+}
 .clickable {
   cursor: pointer;
+}
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 2px;
+  border: 1px solid #555;
+  position: relative;
+  vertical-align: middle;
+  padding: 10px;
+}
+input[type="checkbox"].partial-check {
+  background: #abc;
+}
+input[type="checkbox"]:checked {
+  background: #679;
+}
+.mb-0 {
+  margin-bottom: 0;
 }
 
 /* Mail Table */
