@@ -1,36 +1,51 @@
 <template>
-  <h1>Vue Mail</h1>
+  <h1>VMail Inbox</h1>
+
   <table class="mail-table">
     <tbody>
-      <tr v-for="email in emails" :key="email.id" class="clickable">
-        {{
-          email.subject
-        }}
+      <tr
+        v-for="email in unarchivedEmails"
+        :key="email.id"
+        :class="['clickable', email.read ? 'read' : '']"
+        @click="email.read = true"
+      >
+        <td>
+          <input type="checkbox" />
+        </td>
+        <td>{{ email.from }}</td>
+        <td>
+          <p>
+            <strong>{{ email.subject }}</strong> - {{ email.body }}
+          </p>
+        </td>
+        <td class="date">{{ format(new Date(email.sentAt), "MMM do yyyy") }}</td>
+        <td><button @click="email.archived = true">Archive</button></td>
       </tr>
     </tbody>
   </table>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
+import { format } from "date-fns";
 export default {
   name: "App",
   data() {
     return {
+      format,
       emails: [
         {
           id: 1,
-          from: "wjen@gmail.com",
-          subject: "What's up with Vue 3.0?",
-          body: "Lets learn more about vue 3 together, join us at the conference",
+          from: "team@vuemastery.com",
+          subject: "What's up with Vue 3.0? Here's how to find out from Evan You",
+          body:
+            "The opening keynote of VueConf US this year was Evan You (the creator of Vue), giving his State of the Vuenion address. He walked us through the journey of getting Vue 3 from a prototype to a reality the past year. He also dove into Vue's overall growth in the community.",
           sentAt: "2020-03-27T18:25:43.511Z",
           archived: false,
           read: true
         },
         {
           id: 2,
-          from: "jeffrey@yahoo.net",
+          from: "jeffrey@vuetraining.net",
           subject: "Learn by doing - Vue 3 Zero to Intermediate in 8 weeks",
           body:
             "Building projects is one of the most effective ways to learn - and _the_ most effective way _remember_ what you've learned - but it can be frustrating.\n\nThis 8-week course takes the pain out of 'learning by doing'.\n\nEach week we give you\n\n* a project that will grow your skills without overwhelming you\n* links to hand-picked resources, such as Vue Mastery videos, that share the knowledge you'll need for the project (no more useless rabbit holes)\n* answers to any and all questions you have while working\n* feedback on your completed code (so you're only learning good habits)\n\nOur instructors are standing by to answer your questions.\n\nReady to learn?",
@@ -40,7 +55,7 @@ export default {
         },
         {
           id: 3,
-          from: "damian@gmail.com",
+          from: "damian@dulisz.com",
           subject:
             "#177: Updated Vue.js Roadmap; Vuex v4.0.0-alpha.1 has been released; Kia King Ishii join the core team; Nuxt v2.12 released; Videos from Vue.js Amsterdam 2020 are here!",
           body:
@@ -51,7 +66,7 @@ export default {
         },
         {
           id: 4,
-          from: "anthony@yahoo.com",
+          from: "anthony@vuejsdevelopers.com",
           subject: "'Vue 3 Release Roadmap' + 6 more must-read articles from this week",
           body: "Newsletter Issue #161",
           sentAt: "2020-03-24T18:25:43.511Z",
@@ -60,11 +75,21 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    sortedEmails() {
+      return this.emails.slice().sort((e1, e2) => {
+        return e1.sentAt < e2.sentAt ? 1 : -1;
+      });
+    },
+    unarchivedEmails() {
+      return this.sortedEmails.filter(e => !e.archived);
+    }
   }
 };
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -72,5 +97,43 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+/* Global Styles */
+
+.clickable {
+  cursor: pointer;
+}
+
+/* Mail Table */
+.mail-table {
+  max-width: 1000px;
+  margin: auto;
+  border-collapse: collapse;
+
+  tr {
+    height: 40px;
+  }
+  &.read {
+    background-color: #eee;
+  }
+  &:first-of-type td {
+    border-top: 1px solid black;
+  }
+
+  td {
+    border-bottom: 1px solid black;
+    padding: 5px;
+    text-align: left;
+
+    & p {
+      max-height: 1.2em;
+      overflow-y: hidden;
+      margin: 0;
+    }
+
+    &.date {
+      width: 120px;
+    }
+  }
 }
 </style>
