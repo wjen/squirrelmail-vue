@@ -14,6 +14,7 @@
 <script>
 import MailTable from "@/components/MailTable.vue";
 import useEmailSelection from "@/composables/use-email-selection";
+
 export default {
   name: "App",
   components: {
@@ -28,37 +29,49 @@ export default {
 </script>
 
 <style lang="scss">
+:root {
+  --primary-color: #302ae6;
+  --secondary-color: #536390;
+  --font-color: #424242;
+  --bg-color: #fff;
+  --heading-color: #292922;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
   max-width: 1000px;
   margin: 0 auto;
 }
 
 /* Global Styles */
+
 button {
   font-size: 16px;
   padding: 8px;
   border-radius: 3px;
   margin: 5px 10px 5px 0px;
   cursor: pointer;
+
+  &:disabled {
+    cursor: auto;
+  }
+
+  &.selected {
+    cursor: auto;
+    color: black;
+    border-color: black;
+    border-width: 2px;
+  }
 }
-button:disabled {
-  cursor: auto;
-}
-button.selected {
-  cursor: auto;
-  color: black;
-  border-color: black;
-  border-width: 2px;
-}
+
 .clickable {
   cursor: pointer;
 }
+
 input[type="checkbox"] {
   -webkit-appearance: none;
   cursor: pointer;
@@ -70,13 +83,16 @@ input[type="checkbox"] {
   position: relative;
   vertical-align: middle;
   padding: 10px;
+
+  &.partial-check {
+    background: #abc;
+  }
+
+  &:checked {
+    background: #679;
+  }
 }
-input[type="checkbox"].partial-check {
-  background: #abc;
-}
-input[type="checkbox"]:checked {
-  background: #679;
-}
+
 .mb-0 {
   margin-bottom: 0;
 }
@@ -134,7 +150,7 @@ input[type="checkbox"]:checked {
   background-color: white;
   min-height: 500px;
   z-index: 10;
-  // opacity: 1;
+  opacity: 1;
 }
 
 /* Email Modal */
