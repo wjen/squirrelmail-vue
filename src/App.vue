@@ -1,5 +1,5 @@
 <template>
-  <h1>VMail Inbox</h1>
+  <h1 class="title">SquirrelMail Inbox</h1>
 
   <Suspense>
     <template #default>
@@ -29,12 +29,15 @@ export default {
 </script>
 
 <style lang="scss">
+/* Global Styles */
+
 body {
   --text-color: #222;
   --bkg-color: #fff;
   --anchor-color: #0033cc;
   --read-color: #8f8b8b;
   --modal-color: #fff;
+  --border-color: #222;
 }
 body.dark-theme {
   --text-color: #eee;
@@ -42,6 +45,7 @@ body.dark-theme {
   --read-color: #8f8b8b;
   --anchor-color: #809fff;
   --modal-color: #2c3e50;
+  --border-color: #eee;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -64,7 +68,9 @@ div.modal-card {
   background: var(--modal-color);
 }
 
-/* Global Styles */
+.title {
+  font-family: "Libre Baskerville", serif;
+}
 button {
   font-size: 16px;
   padding: 8px;
@@ -79,7 +85,7 @@ button {
   &.selected {
     cursor: auto;
     color: black;
-    border-color: black;
+    border-color: var(--border-color);
     border-width: 2px;
   }
 }
@@ -95,7 +101,7 @@ input[type="checkbox"] {
   height: 24px;
   background: white;
   border-radius: 2px;
-  border: 1px solid #555;
+  border: 1px solid var(--border-color);
   position: relative;
   vertical-align: middle;
   padding: 10px;
@@ -124,12 +130,12 @@ input[type="checkbox"] {
       background-color: var(--read-color);
     }
     &:first-of-type td {
-      border-top: 1px solid black;
+      border-top: 1px solid var(--border-color);
     }
   }
 
   td {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--border-color);
     padding: 5px;
     text-align: left;
 

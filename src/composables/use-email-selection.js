@@ -3,6 +3,7 @@ import axios from "axios";
 let emails = reactive(new Set());
 
 export const useEmailSelection = function() {
+  /* Select toggle selected mail */
   let toggle = function(email) {
     if (emails.has(email)) {
       emails.delete(email);
@@ -10,10 +11,14 @@ export const useEmailSelection = function() {
       emails.add(email);
     }
   };
+
+  /* Clear all selected mail */
   let clear = () => emails.clear();
   let addMultiple = allEmails => {
     allEmails.forEach(email => emails.add(email));
   };
+
+  /* function to update database for each action provided for each email */
   let forSelected = fn => {
     emails.forEach(email => {
       fn(email);

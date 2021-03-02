@@ -1,4 +1,5 @@
 <template>
+  <!-- Toggle Switch for Dark Mode -->
   <div class="theme-switch-wrapper">
     <label class="theme-switch" for="checkbox">
       <input type="checkbox" id="checkbox" data-theme="dark" @click="darkThemeSwitch" />
@@ -6,10 +7,14 @@
     </label>
     <em>Enable Dark Mode!</em>
   </div>
+
+  <!-- Switch between Inbox and Archived -->
   <button @click="selectScreen('inbox')" :disabled="selectedScreen === 'inbox'">Inbox</button>
   <button @click="selectScreen('archive')" :disabled="selectedScreen === 'archive'">
     Archived
   </button>
+
+  <!-- Table Start -->
   <BulkActionBar :emails="filteredEmails" />
   <table class="mail-table">
     <tbody>
@@ -74,6 +79,7 @@ export default {
         return e1.sentAt < e2.sentAt ? 1 : -1;
       });
     },
+    /* Filter email by archived and inbox to display them based on selected scree */
     filteredEmails() {
       if (this.selectedScreen === "inbox") {
         return this.sortedEmails.filter(e => !e.archived);
@@ -102,6 +108,7 @@ export default {
     updateEmail(email) {
       axios.put(`http://localhost:3000/emails/${email.id}`, email);
     },
+    /*  takes input from mailview and performs actions based on the object passed in */
     changeEmail({ toggleRead, toggleArchive, save, closeModal, changeIndex }) {
       let email = this.openedEmail;
       if (toggleRead) {

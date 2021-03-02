@@ -37,6 +37,8 @@ export default {
     let someEmailsSelected = computed(() => {
       return numberSelected.value > 0 && numberSelected.value < numberEmails.value;
     });
+
+    /* Select either all emails or deslect all emails */
     let bulkSelect = function() {
       if (allEmailsSelected.value) {
         emailSelection.clear();

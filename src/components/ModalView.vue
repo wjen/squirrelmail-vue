@@ -12,6 +12,7 @@ import useKeydown from "../composables/use-keydown";
 
 export default {
   setup(props, { emit }) {
+    /* Press Escape key to leave modal in addition to clicking outside of modal */
     useKeydown([
       {
         key: "Escape",

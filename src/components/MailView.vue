@@ -14,6 +14,7 @@
     <div>
       <em>From {{ email.from }} on {{ format(new Date(email.sentAt), "MMM do yyyy") }}</em>
     </div>
+    <!-- marked used for parsing markdown text -->
     <div v-html="marked(email.body)" />
   </div>
 </template>
