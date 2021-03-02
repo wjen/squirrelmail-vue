@@ -29,26 +29,42 @@ export default {
 </script>
 
 <style lang="scss">
-:root {
-  --primary-color: #302ae6;
-  --secondary-color: #536390;
-  --font-color: #424242;
-  --bg-color: #fff;
-  --heading-color: #292922;
+body {
+  --text-color: #222;
+  --bkg-color: #fff;
+  --anchor-color: #0033cc;
+  --read-color: #8f8b8b;
+  --modal-color: #fff;
 }
-
+body.dark-theme {
+  --text-color: #eee;
+  --bkg-color: #121212;
+  --read-color: #8f8b8b;
+  --anchor-color: #809fff;
+  --modal-color: #2c3e50;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  color: var(--text-color);
   margin-top: 60px;
   max-width: 1000px;
   margin: 0 auto;
 }
+body {
+  color: var(--text-color);
+  background: var(--bkg-color);
+}
+a {
+  color: var(--anchor-color);
+}
+div.modal-card {
+  background: var(--modal-color);
+}
 
 /* Global Styles */
-
 button {
   font-size: 16px;
   padding: 8px;
@@ -105,7 +121,7 @@ input[type="checkbox"] {
     height: 40px;
 
     &.read {
-      background-color: #eee;
+      background-color: var(--read-color);
     }
     &:first-of-type td {
       border-top: 1px solid black;

@@ -1,7 +1,7 @@
 <template>
   <div class="theme-switch-wrapper">
     <label class="theme-switch" for="checkbox">
-      <input type="checkbox" id="checkbox" @click="darkThemeSwitch" />
+      <input type="checkbox" id="checkbox" data-theme="dark" @click="darkThemeSwitch" />
       <div class="slider round"></div>
     </label>
     <em>Enable Dark Mode!</em>
@@ -125,27 +125,8 @@ export default {
         this.openEmail(newEmail);
       }
     },
-    _addDarkTheme() {
-      let darkThemeLinkEl = document.createElement("link");
-      darkThemeLinkEl.setAttribute("rel", "stylesheet");
-      darkThemeLinkEl.setAttribute("href", "/css/darktheme.css");
-      darkThemeLinkEl.setAttribute("id", "dark-theme-style");
-
-      let docHead = document.querySelector("head");
-      docHead.append(darkThemeLinkEl);
-    },
-    _removeDarkTheme() {
-      let darkThemeLinkEl = document.querySelector("#dark-theme-style");
-      let parentNode = darkThemeLinkEl.parentNode;
-      parentNode.removeChild(darkThemeLinkEl);
-    },
     darkThemeSwitch() {
-      let darkThemeLinkEl = document.querySelector("#dark-theme-style");
-      if (!darkThemeLinkEl) {
-        this._addDarkTheme();
-      } else {
-        this._removeDarkTheme();
-      }
+      document.body.classList.toggle("dark-theme");
     }
   }
 };
@@ -153,7 +134,6 @@ export default {
 
 <style lang="scss" scoped>
 // Toggle theme button css
-
 .theme-switch-wrapper {
   display: flex;
   align-items: center;
